@@ -2,14 +2,14 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 // Create Schema
-const ItemSchema = new Schema({
+const ItemsSchema = new Schema({
     equipment: String,
     description: String,
-    supplier: Supplier,
-    category: Category,
+    supplier: String,
+    category: String,
     quantity: Number,
     url: String,
     price: Number
 });
 
-module.exports = Item = mongoose.model('item', ItemSchema)
+module.exports = Items = mongoose.model('items', ItemsSchema)

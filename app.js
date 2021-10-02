@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const itemRouter = require('./routes/api/item');
+const itemsRouter = require('./routes/api/items');
 const { connected } = require('process');
 
 const app = express();
@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Use routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api/items', itemRouter);
+app.use('/api/items', itemsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
