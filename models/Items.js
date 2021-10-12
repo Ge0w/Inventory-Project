@@ -5,8 +5,8 @@ const Schema = mongoose.Schema
 const ItemsSchema = new Schema({
     equipment: String,
     description: String,
-    supplier: String,
-    category: String,
+    supplier: { type: Schema.Types.ObjectId, ref: 'Supplier' },
+    category: { type: Schema.Types.ObjectId, ref: 'Category' },
     quantity: Number,
     url: String,
     price: Number
