@@ -5,12 +5,14 @@
   </div>
   </nav>
 
+{{#each items}}
 <div class="card" style="width: 18rem;">
   <img class="card-img-top" src="..." alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">Equipment title</h5>
-    <p class="card-text">Supplier: Bosch</p>
-    <p class="card-text">Quantity: 1</p>
+    <h5 class="card-title">Equipment: {{this.equipment}}</h5>
+    <p class="card-text">Supplier: {{this.supplier}}</p>
+    <p class="card-text">Quantity: {{this.quantity}}</p>
     <a href="#" class="btn btn-primary">See more</a>
   </div>
 </div>
+{{/each}}
