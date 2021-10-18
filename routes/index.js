@@ -14,4 +14,21 @@ router.get('/', (req, res, next) => {
   })
 });
 
+// Add item
+router.post('/new', (req, res) => {
+  const newItem = new Items({
+      equipment: req.body.equipment,
+      description: req.body.description,
+      supplier: 'TBC',
+      category: 'TBC',
+      quantity: req.body.quantity,
+      url: req.body.url,
+      price: req.body.price
+  });
+
+  newItem.save().then(item => res.json(item));
+  res.redirect('/');
+})
+
+
 module.exports = router;

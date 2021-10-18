@@ -13,6 +13,14 @@ router.get('/', (req, res) => {
         .then(items => res.json(items))
 })
 
+// @route   GET api/item
+// @descr   Get All Item
+// @access  Public 
+router.get('/:id', (req, res) => {
+    Items.findById(req.params.id)
+        .then(item => res.json(item))
+  });
+
 // @route   POST api/item
 // @descr   Create an item 
 // @access  Public 
