@@ -1,33 +1,42 @@
-<h1 class="mb-3">New Item</h1> 
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Inventory</a>
+    <a href="/" class="btn btn-outline-success" type="button">Back to Homepage</a>
+  </div>
+  </nav>
 
-<form method="POST" action="/new">
-    <div class="mb-3">
-        <label for="equipment" class="form-label">Equipment</label>
-        <input name="equipment" type="text" class="form-control" id="equipment" placeholder="Equipment">
-    </div>
-    <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea name="description" class="form-control" id="description" rows="3" placeholder="Add description here"></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="supplier" class="form-label">Supplier</label>
-        <input name="supplier" type="text" class="form-control" id="supplier" placeholder="Supplier">
-    </div>
-    <div class="mb-3">
-        <label for="category" class="form-label">Category</label>
-        <input name="category" type="text" class="form-control" id="category" placeholder="Category">
-    </div>
-    <div class="mb-3">
-        <label for="quantity" class="form-label">Quantity</label>
-        <input name="quantity" type="number" class="form-control" id="quantity" placeholder="Quantity">
-    </div>
-    <div class="mb-3">
-        <label for="url" class="form-label">Supplier URL</label>
-        <input name="url" type="text" class="form-control" id="url" placeholder="Supplier URL">
-    </div>
-    <div class="mb-3">
-        <label for="price" class="form-label">Price (£)</label>
-        <input name="price" type="number" class="form-control" id="price" placeholder="Price">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div id="form-container" class="m-2 p-3">
+    <h1 class="mb-3">New Item</h1> 
+
+    <form method="POST" action="/new">
+        <div class="mb-3">
+            <label for="equipment" class="form-label">Equipment</label>
+            <input name="equipment" type="text" class="form-control" id="equipment" placeholder="Equipment">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" class="form-control" id="description" rows="3" placeholder="Add description here"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="supplier" class="form-label">Supplier</label>
+            <input name="supplier" type="text" class="form-control" id="supplier" placeholder="Supplier">
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <input name="category" type="text" class="form-control" id="category" placeholder="Category">
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input name="quantity" type="number" class="form-control" id="quantity" placeholder="Quantity">
+        </div>
+        <div class="mb-3">
+            <label for="url" class="form-label">Supplier URL</label>
+            <input name="url" type="text" class="form-control" id="url" placeholder="Supplier URL">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price (£)</label>
+            <input name="price" type="number" class="form-control" id="price" placeholder="Price">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

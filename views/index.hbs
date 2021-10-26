@@ -1,18 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Inventory</a>
-    <button class="btn btn-outline-success" type="button">Add item</button>
+    <a href="/new" class="btn btn-outline-success" type="button">Add item</a>
   </div>
   </nav>
 
-{{#each items}}
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Equipment: {{this.equipment}}</h5>
-    <p class="card-text">Supplier: {{this.supplier}}</p>
-    <p class="card-text">Quantity: {{this.quantity}}</p>
-    <a href="#" class="btn btn-primary">See more</a>
+
+<div class="card-group">
+  {{#each items}}
+  <div class="card m-2" style="width: 18rem;">
+    <img class="card-img-top" src="#" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Equipment: {{this.equipment}}</h5>
+      <p class="card-text">Supplier: {{this.supplier}}</p>
+      <p class="card-text">Quantity: {{this.quantity}}</p>
+      <div class="d-flex justify-content-between">
+        <a href="/items/{{this._id}}" class="btn btn-primary" id="{{this._id}}">See more</a>
+        <form action="/api/items/{{this._id}}" method="POST" class="trash">
+          <button type="submit" class="btn btn-danger">
+            <i name="delete-item" value="delete-item" class="bi bi-trash float-right"></i>
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
+  {{/each}}
 </div>
-{{/each}}
+
+

@@ -9,6 +9,7 @@ const Items = require('../../models/Items');
 // @descr   Get All Item
 // @access  Public 
 router.get('/', (req, res) => {
+    console.log('got in items')
     Items.find()
         .then(items => res.json(items))
 })
@@ -24,9 +25,9 @@ router.get('/:id', (req, res) => {
 // @route   DELETE api/item
 // @descr   Delete an item 
 // @access  Public
-router.delete('/:id', (req, res) => {
+router.post('/:id', (req, res) => {
     Items.findById(req.params.id)
-        .then(item => item.remove().then(() => res.json({ success: true })))
+        .then(item => item.remove().then(() => res.redirect('/')))
         .catch(err => res.status(404).json({ success: false }))
     })
 
