@@ -23,7 +23,7 @@
               <i class="bi bi-pen"></i>
             </button>
           </a>
-          <form action="/api/items/{{this._id}}" method="POST" class="ms-1">
+          <form action="/api/items/delete/{{this._id}}" method="POST" class="ms-1">
             <button onclick="return confirm('Are you sure?');"type="submit" class="btn btn-danger">
               <i name="delete-item" value="delete-item" class="bi bi-trash"></i>
             </button>

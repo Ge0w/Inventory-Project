@@ -13,6 +13,14 @@ router.get('/', (req, res) => {
         .then(categorys => res.json(categorys))
 })
 
+// @route   GET api/categorys/:id
+// @descr   Get a category
+// @access  Public 
+router.get('/:id', (req, res) => {
+    Categorys.findById(req.params.id)
+        .then(category => res.json(category))
+  });
+
 // @route   POST api/categorys
 // @descr   Create an category 
 // @access  Public 

@@ -6,6 +6,8 @@ const logger = require('morgan');
 const mongoose = require('mongoose')
 
 const indexRouter = require('./routes/index');
+const categorysRouter = require('./routes/api/categorys');
+const suppliersRouter = require('./routes/api/suppliers');
 const itemsRouter = require('./routes/api/items');
 const newRouter = require('./routes/new');
 const itemPageRouter = require('./routes/items');
@@ -27,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Use routes
 app.use('/', indexRouter);
 app.use('/new', newRouter);
+app.use('/api/categorys', categorysRouter);
+app.use('/api/suppliers', suppliersRouter);
 app.use('/api/items', itemsRouter);
 app.use('/items', itemPageRouter);
 app.use('/update', updatePageRouter);
