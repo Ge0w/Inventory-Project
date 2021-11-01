@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Inventory</a>
+    <a href="/" class="btn btn-outline-success" type="button">Back to Homepage</a>
+  </div>
+  </nav>
+
+<div id="form-container" class="m-2 p-3">
+    <h1 class="mb-3">Update Item</h1> 
+
+    <form method="POST" action="/api/items/update/{{item._id}}">
+        <div class="mb-3">
+            <label for="equipment" class="form-label">Equipment</label>
+            <input name="equipment" type="text" class="form-control" id="equipment" value="{{item.equipment}}">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" class="form-control" id="description" rows="3" value="{{item.description}}"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="supplier" class="form-label">Supplier</label>
+            <input name="supplier" type="text" class="form-control" id="supplier" value="{{item.supplier}}">
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <input name="category" type="text" class="form-control" id="category" value="{{item.category}}">
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input name="quantity" type="number" class="form-control" id="quantity" value="{{item.quantity}}">
+        </div>
+        <div class="mb-3">
+            <label for="url" class="form-label">Supplier URL</label>
+            <input name="url" type="text" class="form-control" id="url" value="{{item.url}}">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price (£)</label>
+            <input name="price" type="number" class="form-control" id="price" value="{{item.price}}">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Item</button>
+    </form>
+</div>

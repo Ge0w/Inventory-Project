@@ -14,5 +14,20 @@
     <p class="card-text">Category: {{item.category}}</p>
     <p class="card-text">Description: {{item.description}}</p>
     <p class="card-text">Item no.: {{item._id}}</p>
+
+      <div class="d-flex">
+        <div id="edit-delete" class="d-flex flex-row">
+          <a href="/update/{{item._id}}" class="me-1">
+            <button type="button" class="btn btn-secondary">
+              <i class="bi bi-pen"></i>
+            </button>
+          </a>
+          <form action="/api/items/{{item._id}}" method="POST" class="ms-1">
+            <button onclick="return confirm('Are you sure?');"type="submit" class="btn btn-danger">
+              <i name="delete-item" value="delete-item" class="bi bi-trash"></i>
+            </button>
+          </form>
+        </div>
+      </div>
   </div>
 </div>

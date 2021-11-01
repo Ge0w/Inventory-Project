@@ -23,11 +23,30 @@ router.get('/:id', (req, res) => {
   });
 
 // @route   DELETE api/item
-// @descr   Delete an item 
+// @descr   Delete an item
 // @access  Public
 router.post('/:id', (req, res) => {
     Items.findById(req.params.id)
         .then(item => item.remove().then(() => res.redirect('/')))
+        .catch(err => res.status(404).json({ success: false }))
+    })
+
+// @route   UPDATE api/item
+// @descr   Update an item
+// @access  Public
+router.post('/update/:id', (req, res) => {
+    Items.findById(req.params.id)
+        .then(item => {
+            item.equipment = req.body.equipment,
+            item.description = req.body.description,
+            item.supplier = req.body.supplier,
+            item.category = req.body.category,
+            item.quantity = req.body.quantity,
+            item.url = req.body.url,
+            item.price = req.body.price
+
+            item.save()
+        }).then(() => res.redirect('/'))
         .catch(err => res.status(404).json({ success: false }))
     })
 

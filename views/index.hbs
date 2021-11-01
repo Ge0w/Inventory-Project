@@ -14,13 +14,21 @@
       <h5 class="card-title">Equipment: {{this.equipment}}</h5>
       <p class="card-text">Supplier: {{this.supplier}}</p>
       <p class="card-text">Quantity: {{this.quantity}}</p>
+
       <div class="d-flex justify-content-between">
         <a href="/items/{{this._id}}" class="btn btn-primary" id="{{this._id}}">See more</a>
-        <form action="/api/items/{{this._id}}" method="POST" class="trash">
-          <button type="submit" class="btn btn-danger">
-            <i name="delete-item" value="delete-item" class="bi bi-trash float-right"></i>
-          </button>
-        </form>
+        <div id="edit-delete" class="float-right d-flex flex-row">
+          <a href="/update/{{this._id}}" class="me-1">
+            <button type="button" class="btn btn-secondary">
+              <i class="bi bi-pen"></i>
+            </button>
+          </a>
+          <form action="/api/items/{{this._id}}" method="POST" class="ms-1">
+            <button onclick="return confirm('Are you sure?');"type="submit" class="btn btn-danger">
+              <i name="delete-item" value="delete-item" class="bi bi-trash"></i>
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

@@ -9,6 +9,7 @@ const indexRouter = require('./routes/index');
 const itemsRouter = require('./routes/api/items');
 const newRouter = require('./routes/new');
 const itemPageRouter = require('./routes/items');
+const updatePageRouter = require('./routes/update');
 const { connected } = require('process');
 
 const app = express();
@@ -28,6 +29,7 @@ app.use('/', indexRouter);
 app.use('/new', newRouter);
 app.use('/api/items', itemsRouter);
 app.use('/items', itemPageRouter);
+app.use('/update', updatePageRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
