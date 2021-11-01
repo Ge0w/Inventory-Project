@@ -3,7 +3,7 @@ const app = require('../../app');
 const router = express.Router();
 const mongoose = require('mongoose')
 
-// Item Model
+// Get Models
 const Suppliers = require('../../models/Supplier');
 const Category = require('../../models/Category');
 const Items = require('../../models/Items');
@@ -14,32 +14,25 @@ const { isValidObjectId } = require('mongoose');
 // @access  Public 
 router.get('/', (req, res) => {
     Items.find()
-        .then(items => res.json(items))
+        .populate({path: 'supplier', model: Suppliers})
+        .populate({path: 'category', model: Category})
+        .exec((err, item) => {
+            if (err) console.log(err)
+            res.json(item)
+        })
 })
 
-// @route   GET api/item
-// @descr   Get All Item
-// @access  Public 
-// router.get('/:id', (req, res) => {
-//     Items.findById(req.params.id)
-//         .then(item => res.json(item))
-//   });
-
-// @route   GET api/item TEST
-// @descr   Get All Item
+// @route   GET api/item/:id
+// @descr   Get Item
 // // @access  Public 
 router.get('/:id', (req, res) => {
     Items.findById(req.params.id)
-    .populate({path: 'supplier', model: Suppliers})
-    .populate({path: 'category', model: Category})
-    .exec((err, item) => {
-      if (err) console.log(err)
-      res.json(item)
-    //   res.render('items', { 
-    //     title: "Item Page",
-    //     item
-    //     });
-    })
+        .populate({path: 'supplier', model: Suppliers})
+        .populate({path: 'category', model: Category})
+        .exec((err, item) => {
+            if (err) console.log(err)
+            res.json(item)
+        })
   });
 
 // @route   POST api/item
