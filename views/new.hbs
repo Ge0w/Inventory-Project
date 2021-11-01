@@ -19,11 +19,19 @@
         </div>
         <div class="mb-3">
             <label for="supplier" class="form-label">Supplier</label>
-            <input name="supplier" type="text" class="form-control" id="supplier" placeholder="Supplier">
+            <select name="supplier" type="text" class="form-control" id="supplier" placeholder="Supplier">
+                {{#each suppliers}}
+                <option value='{{this.name}}'>{{this.name}}</option>
+                {{/each}}
+            </select>
         </div>
         <div class="mb-3">
             <label for="category" class="form-label">Category</label>
-            <input name="category" type="text" class="form-control" id="category" placeholder="Category">
+            <select name="category" type="text" class="form-control" id="category" placeholder="Category">
+                {{#each categorys}}
+                <option value='{{this.name}}'>{{this.name}}</option>
+                {{/each}}
+            </select>
         </div>
         <div class="mb-3">
             <label for="quantity" class="form-label">Quantity</label>
