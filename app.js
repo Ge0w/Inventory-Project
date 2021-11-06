@@ -4,6 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose')
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+
 
 const indexRouter = require('./routes/index');
 const categorysRouter = require('./routes/api/categorys');
@@ -12,6 +16,8 @@ const itemsRouter = require('./routes/api/items');
 const newRouter = require('./routes/new');
 const itemPageRouter = require('./routes/items');
 const updatePageRouter = require('./routes/update');
+const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
 const { connected } = require('process');
 
 const app = express();
@@ -33,7 +39,14 @@ app.use('/api/categorys', categorysRouter);
 app.use('/api/suppliers', suppliersRouter);
 app.use('/api/items', itemsRouter);
 app.use('/items', itemPageRouter);
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 app.use('/update', updatePageRouter);
+
+// Passport setup
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
