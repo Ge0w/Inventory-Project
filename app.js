@@ -7,8 +7,10 @@ const mongoose = require('mongoose')
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const User = require("./models/User")
+const initializePassport = require("./passport-config")
 
-
+//Routers
 const indexRouter = require('./routes/index');
 const categorysRouter = require('./routes/api/categorys');
 const suppliersRouter = require('./routes/api/suppliers');
@@ -47,6 +49,36 @@ app.use('/update', updatePageRouter);
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Passport Local Strategy
+passport.use(
+  new LocalStrategy((email, password, done) => {
+    User.findOne({ email: email }, (err, user) => {
+      if (err) { 
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: "Incorrect email" });
+      }
+      if (user.password !== password) {
+        return done(null, false, { message: "Incorrect password" });
+      }
+      return done(null, user);
+    });
+  })
+);
+
+//Passport session & serialization
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
