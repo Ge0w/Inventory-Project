@@ -9,6 +9,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/User")
 const bcrypt = require('bcryptjs')
+require('dotenv').config()
+
 
 //Routers
 const indexRouter = require('./routes/index');
@@ -103,7 +105,8 @@ app.use((err, req, res, next) => {
 });
 
 //Set up default mongoose connection
-const mongoDB = 'mongodb+srv://geo:geo123@inventoryproject.yrhth.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const dbPassword = process.env.DB_PASS
+const mongoDB = `mongodb+srv://geo:${dbPassword}@inventoryproject.yrhth.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 mongoose
   .connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
   .then(console.log('MongoDB connected...'))
