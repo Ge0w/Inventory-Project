@@ -16,7 +16,8 @@ router.get('/', (req, res, next) => {
       if (err) console.log(err)
       res.render('index', {
         title: 'Inventory Page',
-        items
+        items,
+        user: req.user
       })
   })
 });

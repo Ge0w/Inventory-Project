@@ -8,7 +8,7 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/User")
-const initializePassport = require("./passport-config")
+const bcrypt = require('bcryptjs')
 
 //Routers
 const indexRouter = require('./routes/index');
@@ -20,9 +20,44 @@ const itemPageRouter = require('./routes/items');
 const updatePageRouter = require('./routes/update');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
+const logoutRouter = require('./routes/log-out');
 const { connected } = require('process');
 
 const app = express();
+
+// Passport Local Strategy
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    User.findOne({ username: username }, (err, user) => {
+      if (err) { 
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      }
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          // passwords match! log user in
+          return done(null, user)
+        } else {
+          // passwords do not match!
+          return done(null, false, { message: "Incorrect password" })
+        }
+      })
+    });
+  })
+);
+
+//Passport session & serialization
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,6 +69,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Passport setup
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Use routes
 app.use('/', indexRouter);
 app.use('/new', newRouter);
@@ -44,41 +84,7 @@ app.use('/items', itemPageRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/update', updatePageRouter);
-
-// Passport setup
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Passport Local Strategy
-passport.use(
-  new LocalStrategy((email, password, done) => {
-    User.findOne({ email: email }, (err, user) => {
-      if (err) { 
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, { message: "Incorrect email" });
-      }
-      if (user.password !== password) {
-        return done(null, false, { message: "Incorrect password" });
-      }
-      return done(null, user);
-    });
-  })
-);
-
-//Passport session & serialization
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
+app.use('/log-out', logoutRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

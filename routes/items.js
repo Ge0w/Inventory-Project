@@ -9,7 +9,7 @@ const Items = require('../models/Items');
 /* GET items page. */
 router.get('/', (req, res, next) => {
     res.render('items', { 
-      title: "Item Page" 
+      title: "Item Page",
     });
   });
 

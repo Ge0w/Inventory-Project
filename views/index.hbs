@@ -2,14 +2,19 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Inventory</a>
     <div>
-      <a href="/login" class="btn btn-primary">Login</a>
-      <a href="/register" class="btn btn-primary ms-5">Register</a>
+      {{#if user}}
+      <a href="#" class="btn btn-primary">{{user.username}}</a>
+      <a href="/log-out" class="btn btn-secondary">LOG OUT</a>
       <a href="/new" class="btn btn-outline-success ms-5" type="button">Add item</a>
+      {{else}}
+      <a href="/login" class="btn btn-primary ms-5">Login</a>
+      <a href="/register" class="btn btn-primary ms-5">Register</a>
+      {{/if}}
     </div>
   </div>
   </nav>
 
-
+{{#if user}}
 <div class="card-group">
   {{#each items}}
   <div class="card m-2" style="width: 18rem;">
@@ -37,5 +42,6 @@
   </div>
   {{/each}}
 </div>
+{{/if}}
 
 
